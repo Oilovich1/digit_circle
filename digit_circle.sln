@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36429.23 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "digit_circle", "digit_circle\digit_circle.vcxproj", "{79C116E3-CEA6-4E9D-8645-2B69F52EF4ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79C116E3-CEA6-4E9D-8645-2B69F52EF4ED}.Debug|x64.ActiveCfg = Debug|x64
+		{79C116E3-CEA6-4E9D-8645-2B69F52EF4ED}.Debug|x64.Build.0 = Debug|x64
+		{79C116E3-CEA6-4E9D-8645-2B69F52EF4ED}.Debug|x86.ActiveCfg = Debug|Win32
+		{79C116E3-CEA6-4E9D-8645-2B69F52EF4ED}.Debug|x86.Build.0 = Debug|Win32
+		{79C116E3-CEA6-4E9D-8645-2B69F52EF4ED}.Release|x64.ActiveCfg = Release|x64
+		{79C116E3-CEA6-4E9D-8645-2B69F52EF4ED}.Release|x64.Build.0 = Release|x64
+		{79C116E3-CEA6-4E9D-8645-2B69F52EF4ED}.Release|x86.ActiveCfg = Release|Win32
+		{79C116E3-CEA6-4E9D-8645-2B69F52EF4ED}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {887747E3-3988-425B-9E8F-FB387A3D5511}
+	EndGlobalSection
+EndGlobal
