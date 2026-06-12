@@ -2,6 +2,7 @@
 #include <string>
 #include <cctype>
 #include <fstream>
+#include <sstream>
 
 class BigNumber{
 private:
@@ -111,4 +112,167 @@ std::ostream& operator<<(std::ostream& out, const Equation& eq) {
         << eq.second.getValue() << "="
         << eq.result.getValue();
     return out;
+}
+
+bool isPossibleLength(int aLen, int bLen, int cLen) {
+    int maxLen = std::max(aLen, bLen);
+
+    return cLen == maxLen || cLen == maxLen + 1;
+}
+
+Equation createEquation(const std::string& ring, int aLen, int bLen) {
+    int cLen = ring.size() - aLen - bLen;
+
+    BigNumber a(ring.substr(0, aLen));
+    BigNumber b(ring.substr(aLen, bLen));
+    BigNumber c(ring.substr(aLen + bLen, cLen));
+
+    return Equation(a, b, c);
+}
+
+std::string solveRing(const std::string& ring) {
+    int n = ring.size();
+
+    std::string doubled = ring + ring;
+
+
+    for (int start = 0; start < n; start++) {
+
+        std::string current = doubled.substr(start, n);
+
+
+        for (int aLen = 1; aLen < n - 1; aLen++) {
+
+            for (int bLen = 1; bLen < n - aLen; bLen++) {
+
+                int cLen = n - aLen - bLen;
+
+
+                if (!isPossibleLength(aLen, bLen, cLen)) {
+                    continue;
+                }
+
+
+                Equation eq = createEquation(current, aLen, bLen);
+
+
+                if (eq.check()) {
+                    std::stringstream answer;
+
+                    answer << eq;
+
+                    return answer.str();
+                }
+            }
+        }
+    }
+
+    return "No";
+}
+
+std::string getError(const std::string& ring) {
+    if (ring.empty()) {
+        return "Файл пуст";
+    }
+
+
+    if (ring.size() > 1000) {
+        return "Слишком много знаков";
+    }
+
+
+    for (char c : ring) {
+
+        if (!isdigit(c)) {
+            return "В кольце есть не цифры";
+        }
+    }
+
+
+    return "";
+}
+
+std::string readInput(const std::string& filename) {
+    std::ifstream input(filename);
+
+    if (!input.is_open()) {
+        return "";
+    }
+
+    std::string ring;
+
+    input >> ring;
+
+    return ring;
+}
+
+bool writeOutput(const std::string& filename, const std::string& result) {
+    std::ofstream output(filename);
+
+    if (!output.is_open()) {
+        return false;
+    }
+
+    output << result;
+
+    return true;
+}
+
+bool fileExists(const std::string& filename) {
+    std::ifstream file(filename);
+
+    return file.is_open();
+}
+
+int main() {
+
+    std::string inputFile;
+    std::string outputFile;
+
+
+    std::cout << "Введите имя входного файла: ";
+    std::cin >> inputFile;
+
+
+    if (!fileExists(inputFile)) {
+        std::cout << "Входной файл не найден";
+
+        return 1;
+    }
+
+
+    std::cout << "Введите имя выходного файла: ";
+    std::cin >> outputFile;
+
+
+    std::string ring = readInput(inputFile);
+
+
+    std::string error = getError(ring);
+
+
+    if (!error.empty()) {
+
+        writeOutput(outputFile, error);
+
+        std::cout << "Ошибка: " << error;
+
+        return 0;
+    }
+
+
+    std::string answer = solveRing(ring);
+
+
+    if (!writeOutput(outputFile, answer)) {
+
+        std::cout << "Не удалось создать выходной файл";
+
+        return 1;
+    }
+
+
+    std::cout << "Программа завершена успешно";
+
+    return 0;
 }
