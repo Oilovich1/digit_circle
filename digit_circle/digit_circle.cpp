@@ -86,8 +86,7 @@ public:
         BigNumber a,
         BigNumber b,
         BigNumber c
-    ) : first(a), second(b), result(c) {
-    }
+    ) : first(a), second(b), result(c) {}
 
 
     bool check() const {
@@ -107,9 +106,7 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& out, const Equation& eq) {
-    out << eq.first.getValue() << "+"
-        << eq.second.getValue() << "="
-        << eq.result.getValue();
+    out << eq.first.getValue() << "+" << eq.second.getValue() << "=" << eq.result.getValue();
     return out;
 }
 
@@ -151,9 +148,7 @@ std::string solveRing(const std::string& ring) {
                     continue;
                 }
 
-
                 Equation eq = createEquation(current, aLen, bLen);
-
 
                 if (eq.check()) {
                     std::stringstream answer;
