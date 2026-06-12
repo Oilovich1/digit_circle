@@ -15,6 +15,10 @@ private:
             return false;
         }
 
+        if (value.size() > 1 && value[0] == '0') {
+            return false;
+        }
+
         for (char c : value) {
             if (!isdigit(c)) {
                 return false;
@@ -36,11 +40,6 @@ public:
 
     std::string getValue() const{
         return value;
-    }
-
-    bool hasLeadingZero() const{
-        return value.size() > 1 &&
-            value[0] == '0';
     }
 
     BigNumber add(const BigNumber& other) const{
