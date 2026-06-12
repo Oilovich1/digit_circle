@@ -3,7 +3,7 @@
 #include <cctype>
 #include <fstream>
 #include <sstream>
-
+#include <locale>
 class BigNumber{
 private:
 
@@ -225,7 +225,7 @@ bool fileExists(const std::string& filename) {
 }
 
 int main() {
-
+    setlocale(LC_ALL, "Russian");
     std::string inputFile;
     std::string outputFile;
 
