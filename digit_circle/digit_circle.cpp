@@ -218,55 +218,74 @@ bool fileExists(const std::string& filename) {
     return file.is_open();
 }
 
+void showMenu() {
+    std::cout << "1. Выбрать файл с кольцом." << std::endl;
+    std::cout << "0. Выход." << std::endl;
+}
+
 int main() {
     setlocale(LC_ALL, "Russian");
     std::string inputFile;
     std::string outputFile;
 
-
-    std::cout << "Введите имя входного файла: ";
-    std::cin >> inputFile;
-
-
-    if (!fileExists(inputFile)) {
-        std::cout << "Входной файл не найден";
-
-        return 1;
-    }
+    int choise;
+    do {
+        showMenu();
+        std::cin >> choise;
+        switch (choise) {
+        case 1: {
+            std::cout << "Введите имя входного файла: ";
+            std::cin >> inputFile;
 
 
-    std::cout << "Введите имя выходного файла: ";
-    std::cin >> outputFile;
+            if (!fileExists(inputFile)) {
+                std::cout << "Входной файл не найден";
+
+                return 1;
+            }
 
 
-    std::string ring = readInput(inputFile);
+            std::cout << "Введите имя выходного файла: ";
+            std::cin >> outputFile;
 
 
-    std::string error = getError(ring);
+            std::string ring = readInput(inputFile);
 
 
-    if (!error.empty()) {
-
-        writeOutput(outputFile, error);
-
-        std::cout << "Ошибка: " << error;
-
-        return 0;
-    }
+            std::string error = getError(ring);
 
 
-    std::string answer = solveRing(ring);
+            if (!error.empty()) {
+
+                writeOutput(outputFile, error);
+
+                std::cout << "Ошибка: " << error;
+
+                return 0;
+            }
 
 
-    if (!writeOutput(outputFile, answer)) {
-
-        std::cout << "Не удалось создать выходной файл";
-
-        return 1;
-    }
+            std::string answer = solveRing(ring);
 
 
-    std::cout << "Программа завершена успешно";
+            if (!writeOutput(outputFile, answer)) {
 
-    return 0;
+                std::cout << "Не удалось создать выходной файл";
+
+                return 1;
+            }
+            else {
+                std::cout << "Ответ записан в файл " << outputFile << std::endl;
+            }
+            break;
+        }
+        case 0: {
+            std::cout << "Выход из программы";
+            return 0;
+        }
+        default:
+            std::cout << "Неверный пункт меню";
+            break;
+        }
+    } while (true);
 }
