@@ -239,9 +239,8 @@ int main() {
 
 
             if (!fileExists(inputFile)) {
-                std::cout << "Входной файл не найден";
-
-                return 1;
+                std::cout << "Входной файл не найден" << std::endl;
+                break;
             }
 
 
@@ -259,9 +258,8 @@ int main() {
 
                 writeOutput(outputFile, error);
 
-                std::cout << "Ошибка: " << error;
-
-                return 0;
+                std::cout << "Ошибка: " << error << std::endl;
+                break;
             }
 
 
@@ -270,9 +268,8 @@ int main() {
 
             if (!writeOutput(outputFile, answer)) {
 
-                std::cout << "Не удалось создать выходной файл";
-
-                return 1;
+                std::cout << "Не удалось создать выходной файл" << std::endl;
+                break;
             }
             else {
                 std::cout << "Ответ записан в файл " << outputFile << std::endl;
@@ -284,7 +281,7 @@ int main() {
             return 0;
         }
         default:
-            std::cout << "Неверный пункт меню";
+            std::cout << "Неверный пункт меню" << std::endl;
             break;
         }
     } while (true);
